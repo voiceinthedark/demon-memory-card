@@ -1,33 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// @ts-check
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  // Characted ids to fetch from jikan api
+  const charactersIds = [
+    146158, 146159, 146157, 146156, 173936, 170254,
+    151146, 151148, 172124, 173940, 151145, 173537,
+    151156, 173733, 146736, 172066, 151143, 171967,
+    169779, 170070, 151149, 170248, 151157, 151147,
+    146735, 174159, 151142, 151144, 172052, 169813,
+  ]
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p>Game here</p>
     </>
   )
 }
