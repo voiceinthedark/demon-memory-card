@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  border: 1px solid black;
+  padding: 0;
+  width: 20%;
+  text-overflow: ellipsis;
+
+  img {
+    object-fit: cover;
+    height: 300px;
+    width: 180px;
+  }
+}

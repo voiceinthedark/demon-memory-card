@@ -1,3 +1,4 @@
+import "../../styles/game/card.css"
 export default function Card({ source, name }) {
   return (
     <div className="card">
