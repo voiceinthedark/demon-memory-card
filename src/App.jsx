@@ -23,6 +23,11 @@ function App() {
   /** @type {Array<StructuredCharacter>} 
    * */
   const [structuredData, updateStructuredData] = useImmer([])
+  const [gameStatus, updateGameStatus] = useImmer({
+    gameScreen: 'title',
+    score: 0,
+    highestScore: 0,
+  })
 
   // Characted ids to fetch from jikan api
   const charactersIds = [
@@ -33,6 +38,35 @@ function App() {
     146735, 174159, 151142, 151144, 172052, 169813,
     174147, 174151, 170152, 174150, 174145, 174152,
   ]
+
+  const handleCardClick = (id) => {
+    let charWasClicked = false;
+
+    // Step 1: Update structuredData
+    updateStructuredData(draft => {
+      let char = draft.find((item) => item.id === id);
+      if (!char) {
+        console.warn(`Character with id ${id} not found in structured data.`);
+        return;
+      }
+      charWasClicked = char.clicked; // Capture original clicked status
+
+      if (!char.clicked) {
+        char.clicked = true; // Mark as clicked if not already
+      }
+    });
+
+    // Step 2: Update gameStatus based on the original clicked status
+    updateGameStatus(draft => {
+      if (charWasClicked) {
+        draft.gameScreen = 'lose';
+      } else {
+        const newCurrentScore = draft.score + 1;
+        draft.score = newCurrentScore;
+        draft.highestScore = Math.max(draft.highestScore, newCurrentScore);
+      }
+    });
+  };
 
 
   useEffect(() => {
@@ -56,7 +90,8 @@ function App() {
                 source: d.data.images.jpg.image_url,
                 name: d.data.name,
                 name_kanji: d.data.name_kanji,
-                about: d.data.about
+                about: d.data.about,
+                clicked: false,
               })
             })
           }
@@ -76,7 +111,13 @@ function App() {
 
   return (
     <>
-      <GameBoard data={structuredData} />
+      <GameBoard
+        data={structuredData}
+        updateStructuredData={updateStructuredData}
+        gameStatus={gameStatus}
+        updateGameStatus={updateGameStatus}
+        onCardClick={handleCardClick}
+      />
     </>
   )
 }
