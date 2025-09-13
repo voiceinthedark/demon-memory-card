@@ -1,7 +1,11 @@
 import "../../styles/menu/main-menu.css"
-export default function DifficultyMenu({ setDifficulty }) {
+export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetGame }) {
   function handleClick(difficulty){
     setDifficulty(difficulty)
+    updateGameStatus(draft => {
+      draft.difficulty = difficulty
+    })
+    resetGame(difficulty)
   }
 
   return (
@@ -23,6 +27,17 @@ export default function DifficultyMenu({ setDifficulty }) {
         onClick={() => handleClick('hard')}
       >
         Hard
+      </button>
+
+      <button 
+        className="difficuly-btn"
+        onClick={() => {
+          updateGameStatus(draft => {
+            draft.gameScreen = 'title'
+          })
+        }}
+      >
+        Back
       </button>
 
     </section>

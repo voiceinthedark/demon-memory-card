@@ -25,7 +25,6 @@ export default function MainMenu({ updateGameStatus }) {
       >
         About
       </button>
-
     </section>
   )
 }

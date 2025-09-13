@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { useImmer } from 'use-immer'
 import GameBoard from './components/game/GameBoard';
@@ -38,6 +38,7 @@ function App() {
   })
   const [difficulty, setDifficulty] = useState('easy') // default easy
 
+  const [gameDeck, updateGameDeck] = useImmer([]); // New state for the active game deck
   // Characted ids to fetch from jikan api
   const charactersIds = [
     146158, 146159, 146157, 146156, 173936, 170254,
@@ -54,9 +55,56 @@ function App() {
    * @param {number} take - the number of cards to be taken, 8 for easy etc. 
    * */
   function handleShuffling(data, take = data.length) {
-    let newData = Shuffler.shuffle(data)
-    return newData.slice(take)
+    let newData = data.slice()
+    newData = Shuffler.shuffle(newData)
+    return newData.slice(0, take)
   }
+
+  /**
+     * Initializes or resets the game deck based on difficulty.
+     * Resets clicked status of all cards, selects and shuffles cards for the new deck.
+     * @param {string} difficultyLevel - 'easy', 'normal', or 'hard'.
+     */
+  const resetGame = (difficultyLevel) => {
+    if (structuredData.length === 0) {
+      console.warn("Structured data not yet loaded. Cannot initialize game deck.");
+      return;
+    }
+
+    // Reset all clicked states in the master structuredData for a new game
+    updateStructuredData(draft => {
+      draft.forEach(item => {
+        item.clicked = false;
+      });
+    });
+
+    let cardsToTake;
+    switch (difficultyLevel) {
+      case 'easy':
+        cardsToTake = 8;
+        break;
+      case 'normal':
+        cardsToTake = 16;
+        break;
+      case 'hard':
+        cardsToTake = 32;
+        break;
+      default:
+        cardsToTake = 8; // Default to easy
+    }
+
+    const newGameDeck = handleShuffling(structuredData, cardsToTake);
+    updateGameDeck(draft => {
+      // Replace the entire gameDeck array with the new set of cards
+      draft.splice(0, draft.length, ...newGameDeck);
+    });
+
+    updateGameStatus(draft => {
+      draft.score = 0;
+      // No need to reset highestScore here
+      draft.gameScreen = 'game'; // Transition to game screen
+    });
+  };
 
   // handleCardClick
   /**
@@ -65,6 +113,7 @@ function App() {
    * */
   const handleCardClick = (id) => {
     let charWasClicked = false;
+    let newGameScreen = gameStatus.gameScreen; // Capture current, will update in immer draft
 
     // Step 1: Update structuredData
     updateStructuredData(draft => {
@@ -84,17 +133,29 @@ function App() {
     updateGameStatus(draft => {
       if (charWasClicked) {
         draft.gameScreen = 'lose';
+        newGameScreen = 'lose'
       } else {
         const newCurrentScore = draft.score + 1;
         draft.score = newCurrentScore;
         draft.highestScore = Math.max(draft.highestScore, newCurrentScore);
+
+        // Check for win condition: if current score equals the number of cards in the deck
+        if (newCurrentScore === gameDeck.length) {
+          draft.gameScreen = 'win';
+          newGameScreen = 'win'; // Update local variable
+        }
       }
     });
 
-    updateStructuredData(draft => {
-      // shuffle deck
-      draft = Shuffler.shuffle(draft)
-    })
+    // Step 3: Shuffle the current gameDeck, but only if the game is still active.
+    // Use `newGameScreen` determined above.
+    if (newGameScreen !== 'lose' && newGameScreen !== 'win') {
+      updateGameDeck(draft => {
+        // Create a shallow copy to ensure immer processes it as a new array for shuffling
+        const shuffledDraft = Shuffler.shuffle([...draft]);
+        return shuffledDraft;
+      });
+    }
   };
 
   // fetch characters from api and fill data into states
@@ -142,11 +203,16 @@ function App() {
   return (
     <>
       {gameStatus.gameScreen === 'title' ?
-        <MainMenu updateGameStatus={updateGameStatus} />
+        <MainMenu
+          updateGameStatus={updateGameStatus} />
         : gameStatus.gameScreen === 'config' ?
-          <DifficultyMenu setDifficulty={setDifficulty} />
+          <DifficultyMenu
+            updateGameStatus={updateGameStatus}
+            setDifficulty={setDifficulty} 
+            resetGame={resetGame}
+          />
           : <GameBoard
-            data={structuredData}
+            data={gameDeck}
             updateStructuredData={updateStructuredData}
             gameStatus={gameStatus}
             updateGameStatus={updateGameStatus}
