@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useImmer } from 'use-immer'
@@ -8,6 +7,8 @@ import MainMenu from './components/menu/MainMenu';
 import DifficultyMenu from './components/menu/DifficultyMenu';
 import WinScreen from './components/game/WinScreen'
 import LoseScreen from './components/game/LoseScreen'
+import Modal from './components/menu/Modal';
+import BackgroundVideo from './components/utils/BackgroundVideo';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -39,8 +40,11 @@ function App() {
     highestScore: 0, // maybe save to lacalstorage later
   })
   const [difficulty, setDifficulty] = useState('easy') // default easy
-
   const [gameDeck, updateGameDeck] = useImmer([]); // New state for the active game deck
+  const [isLoading, setIsLoading] = useState(true); // New loading state
+
+  const [showModal, setShowModal] = useState(false)
+
   // Characted ids to fetch from jikan api
   const charactersIds = [
     146158, 146159, 146157, 146156, 173936, 170254,
@@ -166,6 +170,7 @@ function App() {
 
     const fetchCharacters = async () => {
       let url = 'https://api.jikan.moe/v4/characters/'
+
       for (const id of charactersIds) {
         try {
           let res = await fetch(`${url}${id}`)
@@ -188,10 +193,13 @@ function App() {
             })
           }
 
-          await delay(350); // Wait for 1 second between requests to avoid rate limiting
+          await delay(550); // Wait for 1 second between requests to avoid rate limiting
         } catch (error) {
           console.error(`Error fetching character ${id}:`, error);
         }
+      }
+      if (!ignore) {
+        setIsLoading(false)
       }
     };
     fetchCharacters();
@@ -204,26 +212,35 @@ function App() {
 
   return (
     <>
-      {gameStatus.gameScreen === 'title'
-        ? <MainMenu
-          updateGameStatus={updateGameStatus} />
-        : gameStatus.gameScreen === 'config'
-          ? <DifficultyMenu
-            updateGameStatus={updateGameStatus}
-            setDifficulty={setDifficulty}
-            resetGame={resetGame}
-          />
-          : gameStatus.gameScreen === 'game'
-            ? <GameBoard
-              data={gameDeck}
-              updateStructuredData={updateStructuredData}
-              gameStatus={gameStatus}
+      <BackgroundVideo />
+      {isLoading ? (
+        <Modal isOpen={isLoading}>
+          <div className="loading-screen">
+            <h1>Loading Characters...</h1>
+            <p>Please wait</p>
+          </div>
+        </Modal>
+      )
+        : gameStatus.gameScreen === 'title'
+          ? <MainMenu
+            updateGameStatus={updateGameStatus} />
+          : gameStatus.gameScreen === 'config'
+            ? <DifficultyMenu
               updateGameStatus={updateGameStatus}
-              onCardClick={handleCardClick}
+              setDifficulty={setDifficulty}
+              resetGame={resetGame}
             />
-            : gameStatus.gameScreen === 'lose'
-              ? <LoseScreen updateGameStatus={updateGameStatus} />
-              : <WinScreen updateGameStatus={updateGameStatus} />
+            : gameStatus.gameScreen === 'game'
+              ? <GameBoard
+                data={gameDeck}
+                updateStructuredData={updateStructuredData}
+                gameStatus={gameStatus}
+                updateGameStatus={updateGameStatus}
+                onCardClick={handleCardClick}
+              />
+              : gameStatus.gameScreen === 'lose'
+                ? <LoseScreen updateGameStatus={updateGameStatus} />
+                : <WinScreen updateGameStatus={updateGameStatus} />
       }
 
     </>
