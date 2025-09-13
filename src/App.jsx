@@ -1,11 +1,13 @@
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { useImmer } from 'use-immer'
 import GameBoard from './components/game/GameBoard';
 import Shuffler from './components/utils/shuffler';
 import MainMenu from './components/menu/MainMenu';
 import DifficultyMenu from './components/menu/DifficultyMenu';
+import WinScreen from './components/game/WinScreen'
+import LoseScreen from './components/game/LoseScreen'
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -202,22 +204,26 @@ function App() {
 
   return (
     <>
-      {gameStatus.gameScreen === 'title' ?
-        <MainMenu
+      {gameStatus.gameScreen === 'title'
+        ? <MainMenu
           updateGameStatus={updateGameStatus} />
-        : gameStatus.gameScreen === 'config' ?
-          <DifficultyMenu
+        : gameStatus.gameScreen === 'config'
+          ? <DifficultyMenu
             updateGameStatus={updateGameStatus}
-            setDifficulty={setDifficulty} 
+            setDifficulty={setDifficulty}
             resetGame={resetGame}
           />
-          : <GameBoard
-            data={gameDeck}
-            updateStructuredData={updateStructuredData}
-            gameStatus={gameStatus}
-            updateGameStatus={updateGameStatus}
-            onCardClick={handleCardClick}
-          />
+          : gameStatus.gameScreen === 'game'
+            ? <GameBoard
+              data={gameDeck}
+              updateStructuredData={updateStructuredData}
+              gameStatus={gameStatus}
+              updateGameStatus={updateGameStatus}
+              onCardClick={handleCardClick}
+            />
+            : gameStatus.gameScreen === 'lose'
+              ? <LoseScreen updateGameStatus={updateGameStatus} />
+              : <WinScreen updateGameStatus={updateGameStatus} />
       }
 
     </>
