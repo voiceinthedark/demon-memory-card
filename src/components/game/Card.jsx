@@ -13,7 +13,6 @@ export default function Card({ id, source, name, onCardClick }) {
         <img src={source} alt={name} />
         <h2>{name}</h2>
       </button>
-
     </div>
   )
 }

@@ -1,16 +1,21 @@
 .card {
   display: flex;
   flex-direction: column;
-  place-items: center;
+  /* flex: 0.5 0 auto; */
   border: 1px solid black;
   padding: 0;
-  width: 20%;
-  text-overflow: ellipsis;
-  
-  .card-btn{
+  height: 26rem;
+  place-content: stretch;
+
+  .card-btn {
     appearance: none;
     border: none;
     outline: none;
+    height: 100%;
+
+    h2 {
+      text-overflow: ellipsis;
+    }
   }
 
   img {

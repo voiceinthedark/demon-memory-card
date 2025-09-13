@@ -1,0 +1,17 @@
+.difficulty-menu,
+.main-menu{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 140%;
+  font-weight: bold;
+
+  .difficulty-btn,
+  .menu-btn{
+    appearance: none;
+    background-color: black;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 0px;
+  }
+}

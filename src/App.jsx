@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { useImmer } from 'use-immer'
 import GameBoard from './components/game/GameBoard';
+import Shuffler from './components/utils/shuffler';
+import MainMenu from './components/menu/MainMenu';
+import DifficultyMenu from './components/menu/DifficultyMenu';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -23,11 +26,17 @@ function App() {
   /** @type {Array<StructuredCharacter>} 
    * */
   const [structuredData, updateStructuredData] = useImmer([])
+  // TODO: difficulty levels
+  // NOTE: EASY 8 cards, 3 exchanges
+  // NORMAL 16 cards, 2 exchanges
+  // HARD 32 cards, 1 exchange
   const [gameStatus, updateGameStatus] = useImmer({
-    gameScreen: 'title',
+    gameScreen: 'title', // title, options, win, lose
+    difficulty: 'easy', // easy, normal, hard
     score: 0,
-    highestScore: 0,
+    highestScore: 0, // maybe save to lacalstorage later
   })
+  const [difficulty, setDifficulty] = useState('easy') // default easy
 
   // Characted ids to fetch from jikan api
   const charactersIds = [
@@ -39,6 +48,21 @@ function App() {
     174147, 174151, 170152, 174150, 174145, 174152,
   ]
 
+  /**
+   * Shuffle the characters set and take a number of cards
+   * @param {Array<object>} data - the structured data 
+   * @param {number} take - the number of cards to be taken, 8 for easy etc. 
+   * */
+  function handleShuffling(data, take = data.length) {
+    let newData = Shuffler.shuffle(data)
+    return newData.slice(take)
+  }
+
+  // handleCardClick
+  /**
+   * @function handleCardClick to handle the click event on a card on the board
+   * @param {number} id
+   * */
   const handleCardClick = (id) => {
     let charWasClicked = false;
 
@@ -66,9 +90,14 @@ function App() {
         draft.highestScore = Math.max(draft.highestScore, newCurrentScore);
       }
     });
+
+    updateStructuredData(draft => {
+      // shuffle deck
+      draft = Shuffler.shuffle(draft)
+    })
   };
 
-
+  // fetch characters from api and fill data into states
   useEffect(() => {
     let ignore = false;
 
@@ -109,15 +138,22 @@ function App() {
     }
   }, [])
 
+
   return (
     <>
-      <GameBoard
-        data={structuredData}
-        updateStructuredData={updateStructuredData}
-        gameStatus={gameStatus}
-        updateGameStatus={updateGameStatus}
-        onCardClick={handleCardClick}
-      />
+      {gameStatus.gameScreen === 'title' ?
+        <MainMenu updateGameStatus={updateGameStatus} />
+        : gameStatus.gameScreen === 'config' ?
+          <DifficultyMenu setDifficulty={setDifficulty} />
+          : <GameBoard
+            data={structuredData}
+            updateStructuredData={updateStructuredData}
+            gameStatus={gameStatus}
+            updateGameStatus={updateGameStatus}
+            onCardClick={handleCardClick}
+          />
+      }
+
     </>
   )
 }
