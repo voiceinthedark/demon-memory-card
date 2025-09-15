@@ -19,3 +19,4 @@ Demon Slayer, memory card game with Reactjs
 [live wallpapers ymj](https://www.youtube.com/@4ooo4)
 [freesound](https://freesound.org)
 [Mono interface icons](https://www.svgrepo.com/collection/mono-interface-icons/)
+[Demon Slayer Font](https://www.fontshut.com/demon-slayer-font/)
