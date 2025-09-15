@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import "../../styles/menu/main-menu.css"
 import ButtonAnimation from "../animation/ButtonAnimation"
 import { btnHover, btnClick } from "../../assets/sounds/sounds"
@@ -6,8 +6,8 @@ import useSound from 'use-sound'
 
 export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
 
-  const [playHover, stopHover] = useSound(btnHover)
-  const [playClick, stopClick] = useSound(btnClick)
+  const [playHover, {stop}] = useSound(btnHover)
+  const [playClick] = useSound(btnClick)
 
   function handleClick(option) {
     updateGameStatus(draft => {
@@ -33,7 +33,7 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
             playClick()
           }}
           onMouseOver={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Play
         </button>
@@ -47,7 +47,7 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
             playClick()
           }}
           onMouseOver={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Config
         </button>
@@ -60,7 +60,7 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
             playClick()
           }}
           onMouseOver={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           About
         </button>

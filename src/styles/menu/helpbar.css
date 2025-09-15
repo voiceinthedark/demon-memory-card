@@ -1,0 +1,8 @@
+.help-bar{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: inherit;
+  display: flex;
+  gap: 12px;
+}

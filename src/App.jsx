@@ -9,6 +9,7 @@ import WinScreen from './components/game/WinScreen'
 import LoseScreen from './components/game/LoseScreen'
 import Modal from './components/menu/Modal';
 import BackgroundVideo from './components/utils/BackgroundVideo';
+import HelpBar from './components/menu/HelpBar';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -216,7 +217,7 @@ function App() {
             })
           }
 
-          await delay(550); // Wait for 1 second between requests to avoid rate limiting
+          await delay(1000); // Wait for 1 second between requests to avoid rate limiting
         } catch (error) {
           console.error(`Error fetching character ${id}:`, error);
         }
@@ -271,7 +272,7 @@ function App() {
                 ? <LoseScreen updateGameStatus={updateGameStatus} />
                 : <WinScreen updateGameStatus={updateGameStatus} />
       }
-
+      <HelpBar />
     </>
   )
 }

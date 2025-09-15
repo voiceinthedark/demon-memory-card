@@ -4,8 +4,8 @@ import { btnHover, btnClick } from "../../assets/sounds/sounds"
 import useSound from 'use-sound'
 
 export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetGame }) {
-  const [playHover, stopHover] = useSound(btnHover)
-  const [playClick, stopClick] = useSound(btnClick)
+  const [playHover, {stop}] = useSound(btnHover)
+  const [playClick] = useSound(btnClick)
 
   function handleClick(difficulty) {
     setDifficulty(difficulty)
@@ -25,7 +25,7 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
             playClick()
           }}
           onMouseEnter={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Easy
         </button >
@@ -38,7 +38,7 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
             playClick()
           }}
           onMouseEnter={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Normal
         </button>
@@ -51,7 +51,7 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
             playClick()
           }}
           onMouseEnter={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Hard
         </button>
@@ -67,7 +67,7 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
             playClick()
           }}
           onMouseEnter={() => playHover()}
-          onMouseLeave={() => stopHover()}
+          onMouseLeave={() => stop()}
         >
           Back
         </button>
