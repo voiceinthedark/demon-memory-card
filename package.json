@@ -1,9 +1,18 @@
 {
-  "name": "demon-memory-card",
+  "name": "DemonSlayerMC",
   "private": true,
   "author": "voiceinthedark",
-  "version": "0.04.39",
+  "version": "0.04.46",
   "type": "module",
+  "keywords": [
+    "demon-slayer",
+    "react",
+    "reactjs",
+    "kibetsu-no-yaiba",
+    "javascript",
+    "css",
+    "css3"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

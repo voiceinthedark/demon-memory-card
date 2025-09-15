@@ -1,0 +1,15 @@
+.title{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #ff1122;
+  text-shadow: 2px 22px 12px black;
+  letter-spacing: 8px;
+
+  h1{
+    margin-bottom: 0;
+  }
+  h2{
+    margin-top: 0;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import "../../styles/menu/main-menu.css"
 import ButtonAnimation from "../animation/ButtonAnimation"
+import Title from './Title.jsx'
 import { btnHover, btnClick } from "../../assets/sounds/sounds"
 import useSound from 'use-sound'
 
@@ -23,6 +24,7 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
 
   return (
     <section className="main-menu">
+      <Title />
       <ButtonAnimation>
         <button
           id="menu-game-btn"

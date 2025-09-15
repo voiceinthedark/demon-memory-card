@@ -3,6 +3,7 @@ import VolumeOn from '../../assets/icons/VolumeOn'
 import VolumeOff from '../../assets/icons/VolumeOff'
 import AudioMusic from "../utils/AudioMusic"
 import '../../styles/menu/helpbar.css'
+import About from "./About"
 
 export default function HelpBar() {
   const [mute, setMute] = useState(true)
@@ -27,6 +28,7 @@ export default function HelpBar() {
         </button>
       }
       <AudioMusic mute={mute} />
+      <About />
     </section>
   )
 }

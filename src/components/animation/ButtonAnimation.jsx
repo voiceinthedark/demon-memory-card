@@ -1,11 +1,11 @@
-import { motion, scale } from 'motion/react'
+import { motion } from 'motion/react'
 import "../../styles/menu/main-menu.css"
 
 export default function ButtonAnimation({ children }) {
   return (
     <motion.button
       className='button-animation'
-      whileHover={{ scale: 1.2 }}
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.8 }}
       style={box}
     >

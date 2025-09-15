@@ -2,15 +2,13 @@
 
 ## About
 
-Demon Slayer memory card game with Reactjs
+Demon Slayer, memory card game with Reactjs
 
 ## Roadmap
 
-- [ ] Add video background
-- [ ] Add music to the game
-- [ ] Add sound effects
-
-## Todo
+- [x] Add video background
+- [x] Add music to the game
+- [x] Add sound effects
 
 ## Acknowledgment
 
@@ -20,3 +18,4 @@ Demon Slayer memory card game with Reactjs
 [William Morg - Hono no negami](https://soundcloud.com/william-m1234/japanese-fantasy-music-hon-no)
 [live wallpapers ymj](https://www.youtube.com/@4ooo4)
 [freesound](https://freesound.org)
+[Mono interface icons](https://www.svgrepo.com/collection/mono-interface-icons/)
