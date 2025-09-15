@@ -7,4 +7,5 @@
   width: 100vw;
   object-fit: cover;
   filter: sepia(0.5) brightness(0.7);
+  background-attachment: fixed;
 }

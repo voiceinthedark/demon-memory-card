@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { useImmer } from 'use-immer'
 import GameBoard from './components/game/GameBoard';
@@ -42,6 +42,7 @@ function App() {
   const [difficulty, setDifficulty] = useState('easy') // default easy
   const [gameDeck, updateGameDeck] = useImmer([]); // New state for the active game deck
   const [isLoading, setIsLoading] = useState(true); // New loading state
+  const mainMenuGameBtnRef = useRef(null)
 
   // Characted ids to fetch from jikan api
   const charactersIds = [
@@ -63,6 +64,30 @@ function App() {
     newData = Shuffler.shuffle(newData)
     return newData.slice(0, take)
   }
+
+  useEffect(() => {
+    const cardItem = document.querySelector('.card-container')
+    if (cardItem) {
+      switch (gameStatus.difficulty) {
+        case 'easy':
+          cardItem.classList.remove('normal', 'hard')
+          cardItem.classList.add('easy')
+          break;
+        case 'normal':
+          cardItem.classList.remove('easy', 'hard')
+          cardItem.classList.add('normal')
+          break
+        case 'hard':
+          cardItem.classList.remove('easy', 'normal')
+          cardItem.classList.add('hard')
+          break
+      }
+    }
+
+
+  }, [gameStatus])
+
+
 
   /**
      * Initializes or resets the game deck based on difficulty.
@@ -198,6 +223,9 @@ function App() {
       }
       if (!ignore) {
         setIsLoading(false)
+        if (mainMenuGameBtnRef.current) {
+          mainMenuGameBtnRef.current.disabled = false
+        }
       }
     };
     fetchCharacters();
@@ -206,7 +234,7 @@ function App() {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [mainMenuGameBtnRef])
 
 
   return (
@@ -222,7 +250,9 @@ function App() {
       )
         : gameStatus.gameScreen === 'title'
           ? <MainMenu
-            updateGameStatus={updateGameStatus} />
+            updateGameStatus={updateGameStatus}
+            ref={mainMenuGameBtnRef}
+          />
           : gameStatus.gameScreen === 'config'
             ? <DifficultyMenu
               updateGameStatus={updateGameStatus}

@@ -9,5 +9,7 @@
   grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: minmax(350px, 1fr);
   gap: 8px;
+  width: 70%;
+  place-content: center;
   /* height: 100%; */
 }
