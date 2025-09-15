@@ -43,8 +43,6 @@ function App() {
   const [gameDeck, updateGameDeck] = useImmer([]); // New state for the active game deck
   const [isLoading, setIsLoading] = useState(true); // New loading state
 
-  const [showModal, setShowModal] = useState(false)
-
   // Characted ids to fetch from jikan api
   const charactersIds = [
     146158, 146159, 146157, 146156, 173936, 170254,
@@ -203,6 +201,7 @@ function App() {
       }
     };
     fetchCharacters();
+    // resetGame('easy'); // reset and start the game on start
 
     return () => {
       ignore = true

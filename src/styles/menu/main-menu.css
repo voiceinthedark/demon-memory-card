@@ -9,9 +9,12 @@
   .difficulty-btn,
   .menu-btn{
     appearance: none;
-    background-color: black;
+    background-color: #1a1a1a;
     color: #fff;
     border: 1px solid #000;
     border-radius: 0px;
+    padding: 24px 48px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
   }
 }

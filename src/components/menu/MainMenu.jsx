@@ -1,10 +1,12 @@
 import "../../styles/menu/main-menu.css"
+
 export default function MainMenu({ updateGameStatus }) {
   function handleClick(option){
     updateGameStatus(draft => {
       draft.gameScreen = option
     })
   }
+
   return (
     <section className="main-menu">
       <button 
