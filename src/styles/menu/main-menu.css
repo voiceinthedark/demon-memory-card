@@ -1,31 +1,41 @@
 .difficulty-menu,
-.main-menu{
+.main-menu {
   display: flex;
   flex-direction: column;
   gap: 12px;
   font-size: 140%;
   font-weight: bold;
 
-  .difficulty-btn,
-  .menu-btn{
+  .button-animation {
     appearance: none;
-    background-color: #1a1a1a;
-    color: #fff;
     border: 1px solid #000;
     border-radius: 0px;
     padding: 24px 48px;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    opacity: 0.8;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
       background-color: #1b1b1b;
-      opacity: 0.7;
     }
 
-    &:disabled{
+
+
+    &:disabled {
       background-color: #3c3c3c;
     }
+
+    .difficulty-btn,
+    .menu-btn {
+      background-color: #1a1a1a;
+      color: #fff;
+
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      opacity: 0.8;
+
+
+    }
   }
+
+
+
 }
