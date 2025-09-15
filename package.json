@@ -2,7 +2,7 @@
   "name": "demon-memory-card",
   "private": true,
   "author": "voiceinthedark",
-  "version": "0.02.12",
+  "version": "0.03.02",
   "type": "module",
   "scripts": {
     "dev": "vite",
