@@ -1,7 +1,12 @@
 import "../../styles/menu/main-menu.css"
 import ButtonAnimation from "../animation/ButtonAnimation"
+import { btnHover, btnClick } from "../../assets/sounds/sounds"
+import useSound from 'use-sound'
 
 export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetGame }) {
+  const [playHover, stopHover] = useSound(btnHover)
+  const [playClick, stopClick] = useSound(btnClick)
+
   function handleClick(difficulty) {
     setDifficulty(difficulty)
     updateGameStatus(draft => {
@@ -15,7 +20,12 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
       <ButtonAnimation>
         <button
           className="difficulty-btn"
-          onClick={() => handleClick('easy')}
+          onClick={() => {
+            handleClick('easy')
+            playClick()
+          }}
+          onMouseEnter={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Easy
         </button >
@@ -23,7 +33,12 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
       <ButtonAnimation>
         <button
           className="difficulty-btn"
-          onClick={() => handleClick('normal')}
+          onClick={() => {
+            handleClick('normal')
+            playClick()
+          }}
+          onMouseEnter={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Normal
         </button>
@@ -31,7 +46,12 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
       <ButtonAnimation>
         <button
           className="difficulty-btn"
-          onClick={() => handleClick('hard')}
+          onClick={() => {
+            handleClick('hard')
+            playClick()
+          }}
+          onMouseEnter={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Hard
         </button>
@@ -44,7 +64,10 @@ export default function DifficultyMenu({ setDifficulty, updateGameStatus, resetG
             updateGameStatus(draft => {
               draft.gameScreen = 'title'
             })
+            playClick()
           }}
+          onMouseEnter={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Back
         </button>

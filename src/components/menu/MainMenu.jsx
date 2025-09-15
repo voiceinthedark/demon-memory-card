@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from "react"
 import "../../styles/menu/main-menu.css"
 import ButtonAnimation from "../animation/ButtonAnimation"
+import { btnHover, btnClick } from "../../assets/sounds/sounds"
+import useSound from 'use-sound'
 
 export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
+
+  const [playHover, stopHover] = useSound(btnHover)
+  const [playClick, stopClick] = useSound(btnClick)
 
   function handleClick(option) {
     updateGameStatus(draft => {
@@ -23,7 +28,12 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
           id="menu-game-btn"
           ref={ref}
           className="menu-btn"
-          onClick={() => handleClick('game')}
+          onClick={() => {
+            handleClick('game')
+            playClick()
+          }}
+          onMouseOver={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Play
         </button>
@@ -32,7 +42,12 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
       <ButtonAnimation>
         <button
           className="menu-btn"
-          onClick={() => handleClick('config')}
+          onClick={() => {
+            handleClick('config')
+            playClick()
+          }}
+          onMouseOver={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           Config
         </button>
@@ -40,7 +55,12 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
       <ButtonAnimation>
         <button
           className="menu-btn"
-          onClick={() => handleClick('about')}
+          onClick={() => { 
+            handleClick('about') 
+            playClick()
+          }}
+          onMouseOver={() => playHover()}
+          onMouseLeave={() => stopHover()}
         >
           About
         </button>
