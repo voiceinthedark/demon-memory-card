@@ -4,17 +4,74 @@
   left: 0;
   width: inherit;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 12px;
+  height: 50px;
 
-  button {
-    appearance: none;
-    outline: none;
-    background: none;
-    opacity: 0.8;
-    transition: transform 0.3s ease-in-out;
+  .left-bar {
+    display: flex;
 
-    &:hover {
-      transform: scale(1.2);
+    button {
+      appearance: none;
+      outline: none;
+      background: none;
+      opacity: 0.8;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
+
   }
+
+  .right-bar {
+    display: flex;
+
+    .hint-btn {
+      appearance: none;
+      background: transparent;
+      margin-right: 10px;
+      transition: transform 0.5s linear;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .hint-group {
+      position: absolute;
+      bottom: 0;
+      right: 50px;
+      transform: translateX(200px);
+      pointer-events: none;
+      opacity: 0;
+      transition: transform 0.5s linear, opacity 0.5s linear;
+
+      p {
+        position: absolute;
+        top: -90px;
+        left: -50px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .hint-image {
+
+        width: 200px;
+        height: auto;
+      }
+
+    }
+
+    .hint-group.is-visible {
+      transform: translateX(0px);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+  }
+
 }
+
