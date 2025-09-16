@@ -3,8 +3,8 @@ import "../../styles/menu/about.css"
 
 export default function About() {
   return (
-    <section className="about-game">
-      <h4>{packageJson.name} @ {packageJson.version}</h4>
+    <section className="about">
+      <h4>{packageJson.name} v.{packageJson.version}</h4>
       <a
         href="https://github.com/voiceinthedark"
         target="_blank"

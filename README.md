@@ -17,7 +17,7 @@ Demon Slayer, memory card game with Reactjs
 - [x] Add music to the game
 - [x] Add sound effects
 - [x] Save user high score
-- [ ] Make transition animation smoother
+- [x] Make transition animation smoother
 
 ## Acknowledgment
 
@@ -29,3 +29,5 @@ Demon Slayer, memory card game with Reactjs
 - [freesound](https://freesound.org)
 - [Mono interface icons](https://www.svgrepo.com/collection/mono-interface-icons/)
 - [Demon Slayer Font](https://www.fontshut.com/demon-slayer-font/)
+- [Element plus line interface](https://www.svgrepo.com/collection/element-plus-line-interface-icons/)
+- [Minimal UI icon](https://www.svgrepo.com/collection/minimal-ui-icons/)

@@ -11,6 +11,7 @@ import Modal from './components/menu/Modal';
 import BackgroundVideo from './components/utils/BackgroundVideo';
 import HelpBar from './components/menu/HelpBar';
 import logo from './assets/logo/Demon-Slayer-Logo.png'
+import AboutGame from './components/menu/AboutGame';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -290,7 +291,9 @@ function App() {
               />
               : gameStatus.gameScreen === 'lose'
                 ? <LoseScreen updateGameStatus={updateGameStatus} />
-                : <WinScreen updateGameStatus={updateGameStatus} />
+                : gameStatus.gameScreen === 'win'
+                  ? <WinScreen updateGameStatus={updateGameStatus} />
+                  : <AboutGame updateGameStatus={updateGameStatus} />
       }
       <HelpBar />
     </>
