@@ -1,9 +1,15 @@
 import '../../styles/game/lose-screen.css'
+import { clang2 } from '../../assets/sounds/sounds'
+import useSound from 'use-sound'
+
 export default function LoseScreen({ updateGameStatus }) {
+  const [playClang] = useSound(clang2, { volume: 0.5, interrupt: true, playbackRate: 0.5 })
+
   return (
     <section
       className="lose-screen"
       onClick={() => {
+        playClang()
         updateGameStatus(draft => {
           draft.gameScreen = 'title'
         })

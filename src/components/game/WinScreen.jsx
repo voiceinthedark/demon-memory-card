@@ -1,12 +1,19 @@
 import '../../styles/game/lose-screen.css'
+import { clang2 } from '../../assets/sounds/sounds'
+import useSound from 'use-sound'
+
 export default function WinScreen({ updateGameStatus }) {
+  const [playClang] = useSound(clang2, { volume: 0.5, interrupt: true, playbackRate: 0.5 })
+
   return (
-    <section 
+    <section
       className="win-screen"
       onClick={() => {
+        playClang()
         updateGameStatus(draft => {
           draft.gameScreen = 'title'
         })
+
       }}
     >
       <h1>The Hashira prevailed</h1>

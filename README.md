@@ -18,6 +18,8 @@ Demon Slayer, memory card game with Reactjs
 - [x] Add sound effects
 - [x] Save user high score
 - [x] Make transition animation smoother
+- [ ] Add quit button
+- [x] Add sound effects on cards
 
 ## Acknowledgment
 
