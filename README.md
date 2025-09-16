@@ -6,10 +6,10 @@ Demon Slayer, memory card game with Reactjs
 
 ## Gallery
 
-![intro]('./public/Capture d’écran du 2025-09-16 17-48-27.png')
-![game]('./public/Capture d’écran du 2025-09-16 17-47-36.png')
-![game2]('./public/Capture d’écran du 2025-09-16 17-49-50.png')
-![game3]('./public/Capture d’écran du 2025-09-16 17-50-13.png')
+![intro](./public/Capture d’écran du 2025-09-16 17-48-27.png)
+![game](./public/Capture d’écran du 2025-09-16 17-47-36.png)
+![game2](./public/Capture d’écran du 2025-09-16 17-49-50.png)
+![game3](./public/Capture d’écran du 2025-09-16 17-50-13.png)
 
 ## Features
 
