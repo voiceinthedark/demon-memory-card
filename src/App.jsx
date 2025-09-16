@@ -12,6 +12,7 @@ import BackgroundVideo from './components/utils/BackgroundVideo';
 import HelpBar from './components/menu/HelpBar';
 import logo from './assets/logo/Demon-Slayer-Logo.png'
 import AboutGame from './components/menu/AboutGame';
+import QuitGame from './components/menu/QuitGame';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -282,13 +283,16 @@ function App() {
               resetGame={resetGame}
             />
             : gameStatus.gameScreen === 'game'
-              ? <GameBoard
-                data={gameDeck}
-                updateStructuredData={updateStructuredData}
-                gameStatus={gameStatus}
-                updateGameStatus={updateGameStatus}
-                onCardClick={handleCardClick}
-              />
+              ? <>
+                <GameBoard
+                  data={gameDeck}
+                  updateStructuredData={updateStructuredData}
+                  gameStatus={gameStatus}
+                  updateGameStatus={updateGameStatus}
+                  onCardClick={handleCardClick}
+                />
+                <QuitGame updateGameStatus={updateGameStatus} />
+              </>
               : gameStatus.gameScreen === 'lose'
                 ? <LoseScreen updateGameStatus={updateGameStatus} />
                 : gameStatus.gameScreen === 'win'

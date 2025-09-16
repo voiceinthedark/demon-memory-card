@@ -4,11 +4,18 @@
 
 Demon Slayer, memory card game with Reactjs
 
+## Gallery
+
+![intro]('./public/Capture d’écran du 2025-09-16 17-48-27.png')
+![game]('./public/Capture d’écran du 2025-09-16 17-47-36.png')
+![game2]('./public/Capture d’écran du 2025-09-16 17-49-50.png')
+![game3]('./public/Capture d’écran du 2025-09-16 17-50-13.png')
+
 ## Features
 
 - **Modern design:** Intuitive and elegant design
 - **Audio context:** Music soundtrack and audio effects
-- **Random Backgrounds:** Randomly chosen background videos
+- **Dynamic Backgrounds:** Randomly chosen background videos
 - **User score:** User score is remembered between sessions
 
 ## Roadmap
@@ -18,7 +25,7 @@ Demon Slayer, memory card game with Reactjs
 - [x] Add sound effects
 - [x] Save user high score
 - [x] Make transition animation smoother
-- [ ] Add quit button
+- [x] Add quit button during game
 - [x] Add sound effects on cards
 
 ## Acknowledgment
@@ -33,3 +40,4 @@ Demon Slayer, memory card game with Reactjs
 - [Demon Slayer Font](https://www.fontshut.com/demon-slayer-font/)
 - [Element plus line interface](https://www.svgrepo.com/collection/element-plus-line-interface-icons/)
 - [Minimal UI icon](https://www.svgrepo.com/collection/minimal-ui-icons/)
+- [Iconwrap interface icons](https://www.svgrepo.com/collection/iconwrap-filled-interface-icons/)
