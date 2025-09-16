@@ -1,9 +1,10 @@
 {
   "name": "DemonSlayerMCG",
-  "private": true,
+  "private": false,
   "author": "voiceinthedark",
   "version": "0.04.78",
   "type": "module",
+  "homepage": "https://demon-memory-card.vercel.app/",
   "keywords": [
     "demon-slayer",
     "react",
@@ -11,8 +12,13 @@
     "kibetsu-no-yaiba",
     "javascript",
     "css",
-    "css3"
+    "css3",
+    "vite"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voiceinthedark/demon-memory-card"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
