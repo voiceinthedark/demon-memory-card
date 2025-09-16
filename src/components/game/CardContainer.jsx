@@ -7,7 +7,7 @@ export default function CardContainer({ data, updateStructuredData, gameStatus, 
     <section className="card-container">
       {data.map(d => {
         return (
-          <CardAnimation>
+          <CardAnimation key={d.id}>
             <Card
               key={d.id}
               id={d.id}

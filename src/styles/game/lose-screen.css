@@ -1,0 +1,7 @@
+@import url('../../index.css');
+
+.win-screen,
+.lose-screen{
+  font-family: 'Demon Slayer';
+  cursor: pointer;
+}

@@ -1,3 +1,4 @@
+import '../../styles/game/lose-screen.css'
 export default function LoseScreen({ updateGameStatus }) {
   return (
     <section

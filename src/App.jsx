@@ -10,6 +10,7 @@ import LoseScreen from './components/game/LoseScreen'
 import Modal from './components/menu/Modal';
 import BackgroundVideo from './components/utils/BackgroundVideo';
 import HelpBar from './components/menu/HelpBar';
+import logo from './assets/logo/Demon-Slayer-Logo.png'
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -30,7 +31,6 @@ function App() {
   /** @type {Array<StructuredCharacter>} 
    * */
   const [structuredData, updateStructuredData] = useImmer([])
-  // TODO: difficulty levels
   // NOTE: EASY 8 cards, 3 exchanges
   // NORMAL 16 cards, 2 exchanges
   // HARD 32 cards, 1 exchange
@@ -84,8 +84,6 @@ function App() {
           break
       }
     }
-
-
   }, [gameStatus])
 
 
@@ -244,14 +242,23 @@ function App() {
       {isLoading ? (
         <Modal isOpen={isLoading}>
           <div className="loading-screen">
-            <h1>Loading Characters...</h1>
-            <p>Please wait</p>
+            <div className='left'>
+              <h1>Loading Characters...</h1>
+              <p>Please wait</p>
+            </div>
+            <div className='right'>
+              <img 
+                src={logo} 
+                alt="demon slayer logo" 
+                className='ds-logo' />
+            </div>
           </div>
         </Modal>
       )
         : gameStatus.gameScreen === 'title'
           ? <MainMenu
             updateGameStatus={updateGameStatus}
+            resetGame={resetGame}
             ref={mainMenuGameBtnRef}
           />
           : gameStatus.gameScreen === 'config'

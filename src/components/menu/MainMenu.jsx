@@ -5,7 +5,7 @@ import Title from './Title.jsx'
 import { btnHover, btnClick } from "../../assets/sounds/sounds"
 import useSound from 'use-sound'
 
-export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
+export default React.forwardRef(function MainMenu({ updateGameStatus, resetGame }, ref) {
 
   const [playHover, {stop}] = useSound(btnHover)
   const [playClick] = useSound(btnClick)
@@ -14,12 +14,14 @@ export default React.forwardRef(function MainMenu({ updateGameStatus }, ref) {
     updateGameStatus(draft => {
       draft.gameScreen = option
     })
+    if(option === 'game'){
+      resetGame('easy')
+    }
   }
 
   useEffect(() => {
     if (ref && ref.current)
       ref.current.disabled = true
-
   }, [ref])
 
   return (
