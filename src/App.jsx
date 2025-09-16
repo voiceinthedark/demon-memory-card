@@ -38,8 +38,9 @@ function App() {
     gameScreen: 'title', // title, options, win, lose
     difficulty: 'easy', // easy, normal, hard
     score: 0,
-    highestScore: 0, // maybe save to lacalstorage later
+    highestScore: localStorage.getItem('highestScore') || 0, // maybe save to lacalstorage later
   })
+
   const [difficulty, setDifficulty] = useState('easy') // default easy
   const [gameDeck, updateGameDeck] = useImmer([]); // New state for the active game deck
   const [isLoading, setIsLoading] = useState(true); // New loading state
@@ -65,6 +66,18 @@ function App() {
     newData = Shuffler.shuffle(newData)
     return newData.slice(0, take)
   }
+
+  // store highestScore
+  useEffect(() => {
+    const high = parseInt(localStorage.getItem('highestScore'))
+    if (high) {
+      if (gameStatus.highestScore > high) {
+        localStorage.setItem('highestScore', gameStatus.highestScore)
+      }
+    } else {
+      localStorage.setItem('highestScore', gameStatus.highestScore)
+    }
+  }, [gameStatus])
 
   useEffect(() => {
     const cardItem = document.querySelector('.card-container')

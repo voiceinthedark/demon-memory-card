@@ -15,6 +15,9 @@ export default React.forwardRef(function MainMenu({ updateGameStatus, resetGame 
       draft.gameScreen = option
     })
     if(option === 'game'){
+      updateGameStatus(draft =>{
+        draft.difficulty = 'easy'
+      })
       resetGame('easy')
     }
   }

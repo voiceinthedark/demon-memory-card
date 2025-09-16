@@ -4,11 +4,19 @@
 
 Demon Slayer, memory card game with Reactjs
 
+## Features
+
+- **Modern design:** Intuitive and elegant design
+- **Audio context:** Music soundtrack and audio effects
+- **Random Backgrounds:** Randomly chosen background videos
+- **User score:** User score is remembered between sessions
+
 ## Roadmap
 
 - [x] Add video background
 - [x] Add music to the game
 - [x] Add sound effects
+- [x] Save user high score
 
 ## Acknowledgment
 
