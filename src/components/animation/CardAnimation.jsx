@@ -23,6 +23,10 @@ export default function CardAnimation({ children }) {
         rotate: 3,
         transition: { duration: 0.5, ease: "easeOut" }
       }}
+      whileTap={{
+        scale: 1,
+        rotate: 0,
+      }}
     >
       <div className={`card-animation-wrapper ${shouldAnimate ? 'animate' : ''}`}>
         {children}

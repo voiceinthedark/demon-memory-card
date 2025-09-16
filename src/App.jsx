@@ -247,9 +247,9 @@ function App() {
               <p>Please wait</p>
             </div>
             <div className='right'>
-              <img 
-                src={logo} 
-                alt="demon slayer logo" 
+              <img
+                src={logo}
+                alt="demon slayer logo"
                 className='ds-logo' />
             </div>
           </div>

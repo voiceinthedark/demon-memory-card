@@ -21,7 +21,7 @@ export default React.forwardRef(function MainMenu({ updateGameStatus, resetGame 
 
   useEffect(() => {
     if (ref && ref.current)
-      ref.current.disabled = true
+      ref.current.disabled = false
   }, [ref])
 
   return (
